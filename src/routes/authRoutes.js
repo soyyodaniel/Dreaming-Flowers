@@ -17,11 +17,11 @@ const { authenticateToken } = require('../middlewares/auth');
  *           schema:
  *             type: object
  *             required:
- *               - nombre
+ *               - name
  *               - email
  *               - password
  *             properties:
- *               nombre:
+ *               name:
  *                 type: string
  *                 example: Juan Pérez
  *               email:

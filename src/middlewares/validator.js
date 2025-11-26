@@ -3,7 +3,7 @@ const { errorResponse } = require('../utils/response');
 
 // reglas de validación para registro
 const registerSchema = Joi.object({
-  nombre: Joi.string().min(3).max(100).required().messages({
+  name: Joi.string().min(3).max(100).required().messages({
     'string.empty': 'El nombre es obligatorio',
     'string.min': 'El nombre debe tener al menos 3 caracteres',
     'string.max': 'El nombre no puede tener más de 100 caracteres'

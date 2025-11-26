@@ -89,7 +89,6 @@ class Floreria {
       INNER JOIN ciudades c ON f.id_ciudad = c.id
       INNER JOIN usuarios u ON f.id_usuario = u.id
       ${whereClause}
-      ORDER BY f.created_at DESC
       LIMIT ? OFFSET ?
     `;
 
