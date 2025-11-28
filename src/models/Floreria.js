@@ -9,9 +9,9 @@ class Floreria {
       descripcion,
       logo,
       ubicacion,
-      /*telefono,
+      telefono,
       email,
-      horario,*/
+      horario,
       estatus = 'activo',
       id_ciudad,
       id_usuario
@@ -19,12 +19,12 @@ class Floreria {
 
     const sql = `
       INSERT INTO florerias 
-      (nombre, descripcion, logo, ubicacion, estatus, id_ciudad, id_usuario) 
+      (nombre, descripcion, logo, direccion, telefono, correo_electronico, horarios, estatus, id_ciudad, id_usuario) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const result = await query(sql, [
-      nombre, descripcion, logo, ubicacion, telefono, correo, horario, estatus, id_ciudad, id_usuario
+      nombre, descripcion, logo, ubicacion, telefono, email, horario, estatus, id_ciudad, id_usuario
     ]);
 
     return this.findById(result.insertId);
@@ -119,7 +119,7 @@ class Floreria {
     const values = [];
 
     const allowedFields = [
-      'nombre', 'descripcion', 'logo', 'ubicacion', 
+      'nombre', 'descripcion', 'logo', 'ubicacion',
       'telefono', 'email', 'horario', 'estatus', 'id_ciudad'
     ];
 
@@ -138,7 +138,7 @@ class Floreria {
 
     const sql = `UPDATE florerias SET ${fields.join(', ')} WHERE id = ?`;
     await query(sql, values);
-    
+
     return this.findById(id);
   }
 

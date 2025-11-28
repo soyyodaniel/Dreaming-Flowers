@@ -43,8 +43,7 @@ const upload = require('../config/multer');
  *       - in: query
  *         name: estatus
  *         schema:
- *           type: string
- *           enum: [activo, inactivo]
+ *           type: number
  *         description: Filtrar por estatus
  *       - in: query
  *         name: id_ciudad
@@ -126,9 +125,8 @@ router.get('/:id', authenticateToken, floreriaController.getById);
  *                 type: string
  *                 example: Lun-Sab 9:00-19:00
  *               estatus:
- *                 type: string
- *                 enum: [activo, inactivo]
- *                 default: activo
+ *                 type: number
+ *                 default: 1
  *               id_ciudad:
  *                 type: integer
  *                 example: 1
@@ -183,8 +181,7 @@ router.post(
  *               horario:
  *                 type: string
  *               estatus:
- *                 type: string
- *                 enum: [activo, inactivo]
+ *                 type: integer
  *               id_ciudad:
  *                 type: integer
  *     responses:

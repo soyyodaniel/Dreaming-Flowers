@@ -33,10 +33,10 @@ const floreriaSchema = Joi.object({
   }),
   descripcion: Joi.string().max(1000).allow('', null),
   ubicacion: Joi.string().max(255).allow('', null),
- /* telefono: Joi.string().max(20).allow('', null),
+  telefono: Joi.string().max(20).allow('', null),
   email: Joi.string().email().allow('', null),
-  horario: Joi.string().max(100).allow('', null),*/
-  estatus: Joi.string().valid(0,1,2).default(1),
+  horario: Joi.string().max(100).allow('', null),
+  estatus: Joi.number().integer().required(),
   id_ciudad: Joi.number().integer().required().messages({
     'number.base': 'El ID de ciudad debe ser un número',
     'any.required': 'El ID de ciudad es obligatorio'
