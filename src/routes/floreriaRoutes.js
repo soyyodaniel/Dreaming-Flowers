@@ -17,7 +17,7 @@ const upload = require('../config/multer');
  *       200:
  *         description: Estadísticas obtenidas
  */
-//router.get('/stats', authenticateToken, floreriaController.getStats);
+router.get('/stats', authenticateToken, floreriaController.getStats);
 
 /**
  * @swagger
@@ -237,6 +237,6 @@ router.delete('/:id', authenticateToken, floreriaController.delete);
  *       200:
  *         description: Florerías encontradas
  */
-//router.get('/ciudad/:idCiudad', authenticateToken, floreriaController.getByCiudad);
+router.get('/ciudad/:idCiudad', authenticateToken, floreriaController.getByCiudad);
 
 module.exports = router;

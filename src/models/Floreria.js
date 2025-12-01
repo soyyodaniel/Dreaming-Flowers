@@ -119,8 +119,8 @@ class Floreria {
     const values = [];
 
     const allowedFields = [
-      'nombre', 'descripcion', 'logo', 'ubicacion',
-      'telefono', 'email', 'horario', 'estatus', 'id_ciudad'
+      'nombre', 'descripcion', 'logo', 'direccion',
+      'telefono', 'correo_electronico', 'horarios', 'estatus', 'id_ciudad'
     ];
 
     allowedFields.forEach(field => {
