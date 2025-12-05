@@ -1,0 +1,108 @@
+:root {
+    --brand-primary: #d63384;       /* Rosa Principal */
+    --brand-dark: #a61e4d;          /* Rosa Oscuro para hover/navbar */
+    --brand-light: #fff0f6;         /* Rosa muy claro para fondos */
+    --brand-success: #198754;       /* Verde Semántico */
+    --brand-danger: #dc3545;        /* Rojo Semántico */
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn-primary {
+    background-color: var(--brand-primary);
+    border-color: var(--brand-primary);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--brand-dark);
+    border-color: var(--brand-dark);
+}
+
+.btn-outline-primary {
+    color: var(--brand-primary);
+    border-color: var(--brand-primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--brand-primary);
+    border-color: var(--brand-primary);
+    color: white;
+}
+
+.text-primary {
+    color: var(--brand-primary) !important;
+}
+
+.bg-primary {
+    background-color: var(--brand-primary) !important;
+}
+
+/* Navbar */
+.navbar-custom {
+    background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 100%);
+    box-shadow: 0 4px 12px rgba(214, 51, 132, 0.2);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 1.5rem;
+}
+
+/* Tarjetas de estadísticas*/
+.stat-card {
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.stat-card .card-body {
+    position: relative;
+    z-index: 1;
+}
+
+/* Iconos de fondo decorativos en las tarjetas */
+.stat-icon-bg {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    font-size: 5rem;
+    opacity: 0.15;
+    z-index: 0;
+    transform: rotate(-15deg);
+}
+
+/* Estilos específicos para la tarjeta Total (Rosa) */
+.card-pink {
+    background: linear-gradient(45deg, var(--brand-dark), var(--brand-primary));
+    color: white;
+}
+
+/* Tabla de florerías */
+.table-custom thead th {
+    background-color: var(--brand-light);
+    color: var(--brand-dark);
+    border-bottom: 2px solid var(--brand-primary);
+    font-weight: 600;
+}
+
+.status-badge {
+    font-size: 0.85em;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* Modal */
+.modal-header-pink {
+    background-color: var(--brand-primary);
+    color: white;
+}

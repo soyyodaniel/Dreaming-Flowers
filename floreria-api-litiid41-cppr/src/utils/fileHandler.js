@@ -1,9 +1,17 @@
 const fs = require('fs');
 const path = require('path');
 
-// eliminar archivo
-const deleteFile = (filePath) => {
+// Definir la ruta física donde se guardan los archivos
+// Subimos 2 niveles desde 'src/utils' para llegar a la raíz y entrar a 'uploads/logos'
+const uploadDir = path.join(__dirname, '../../uploads/logos');
+
+// 1. Eliminar archivo físico
+const deleteFile = (filename) => {
   try {
+    // Si viene la ruta completa, extraemos solo el nombre del archivo
+    const name = path.basename(filename);
+    const filePath = path.join(uploadDir, name);
+
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
       console.log(`Archivo eliminado: ${filePath}`);
@@ -16,24 +24,24 @@ const deleteFile = (filePath) => {
   }
 };
 
-// obtener ruta completa del archivo
+// 2. Obtener ruta física (para uso interno del servidor)
 const getFilePath = (filename) => {
-  const uploadDir = process.env.UPLOAD_PATH || './uploads/logos';
   return path.join(uploadDir, filename);
 };
 
-// verifica si el archivo existe
+// 3. Verificar si el archivo existe
 const fileExists = (filename) => {
   const filePath = getFilePath(filename);
   return fs.existsSync(filePath);
 };
 
-// obtener url pública del archivo
+// 4. Obtener URL pública (CORREGIDO)
+// Ahora devolvemos una ruta RELATIVA (empieza con /)
+// El frontend se encargará de ponerle el http://localhost:3000 antes.
 const getFileUrl = (req, filename) => {
   if (!filename) return null;
-  const protocol = req.protocol;
-  const host = req.get('host');
-  return `${protocol}://${host}/uploads/logos/${filename}`;
+  // Esto genera: "/uploads/logos/mi-imagen.jpg"
+  return `/uploads/logos/${filename}`;
 };
 
 module.exports = {

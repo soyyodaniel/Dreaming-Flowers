@@ -74,6 +74,12 @@ const floreriaController = {
       if (req.file) {
         deleteFile(getFilePath(req.file.filename));
       }
+
+      // Manejo especifico para error de ciudad inexistente
+      if (error.message === 'La ciudad especificada no existe') {
+        return res.status(400).json(errorResponse(error.message, 400));
+      }
+
       next(error);
     }
   },
@@ -171,19 +177,18 @@ const floreriaController = {
     }
   },
 
-  // 1. Controlador para Estadísticas
+  // Controlador para Estadísticas
   getStats: async (req, res, next) => {
     try {
       const stats = await Floreria.getStats();
       // Usamos el helper successResponse
       res.json(successResponse(stats, 'Estadísticas obtenidas exitosamente'));
     } catch (error) {
-      // Usamos next(error) para que el manejo de errores sea igual al resto
       next(error);
     }
   },
 
-  // 2. Controlador para obtener por Ciudad
+  // Controlador para obtener por Ciudad
   getByCiudad: async (req, res, next) => {
     try {
       const { idCiudad } = req.params;

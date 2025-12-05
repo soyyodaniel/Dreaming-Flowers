@@ -1,0 +1,40 @@
+/* Centrar contenido vertical y horizontalmente */
+body {
+    background-color: #f0f2f5;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilos de la tarjeta de login */
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    background-color: white;
+}
+
+/* Estilo del logo o título */
+.brand-logo {
+    color: #d63384;
+    /* Rosa estilo florería */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Botón personalizado */
+.btn-login {
+    background-color: #d63384;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #b02a6b;
+    /* Un poco más oscuro al pasar el mouse */
+}

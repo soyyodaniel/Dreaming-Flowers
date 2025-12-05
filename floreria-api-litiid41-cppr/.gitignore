@@ -5,7 +5,7 @@ node_modules/
 .env
 
 # Archivos subidos
-uploads/
+# uploads/ (Decidimos presentar los logos para las interfaces)
 
 # Logs
 *.log

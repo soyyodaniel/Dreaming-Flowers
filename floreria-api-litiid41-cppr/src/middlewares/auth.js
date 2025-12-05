@@ -20,8 +20,8 @@ const authenticateToken = async (req, res, next) => {
 
     // verificar que el usuario existe y está activo
     const user = await User.findById(decoded.userId);
-    
-    if (!user || user.estatus!=1) {
+
+    if (!user || user.estatus != 1) {
       return res.status(401).json(
         errorResponse('Usuario no autorizado', 401)
       );
