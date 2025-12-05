@@ -1,4 +1,3 @@
-
 const { query } = require('../config/database');
 
 class Floreria {
@@ -9,22 +8,30 @@ class Floreria {
       descripcion,
       logo,
       ubicacion,
-      /*telefono,
+      telefono,
       email,
-      horario,*/
+      horario,
       estatus = 'activo',
       id_ciudad,
       id_usuario
     } = floreriaData;
 
+    // Verificar que la ciudad existe antes de crear florería
+    const cityCheckSql = 'SELECT id FROM ciudades WHERE id = ?';
+    const cityResult = await query(cityCheckSql, [id_ciudad]);
+
+    if (!cityResult || cityResult.length === 0) {
+      throw new Error('La ciudad especificada no existe');
+    }
+
     const sql = `
       INSERT INTO florerias 
-      (nombre, descripcion, logo, ubicacion, estatus, id_ciudad, id_usuario) 
+      (nombre, descripcion, logo, direccion, telefono, correo_electronico, horarios, estatus, id_ciudad, id_usuario) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const result = await query(sql, [
-      nombre, descripcion, logo, ubicacion, telefono, correo, horario, estatus, id_ciudad, id_usuario
+      nombre, descripcion, logo, ubicacion, telefono, email, horario, estatus, id_ciudad, id_usuario
     ]);
 
     return this.findById(result.insertId);
@@ -51,17 +58,23 @@ class Floreria {
 
   // listar todas las florerías con paginación
   static async findAll(page = 1, limit = 10, filters = {}) {
-    const offset = (page - 1) * limit;
+    // 1. Validar estrictamente que sean números (evita SQL Injection manual)
+    const limitNum = Number(limit) || 10;
+    const pageNum = Number(page) || 1;
+    const offset = (pageNum - 1) * limitNum;
+
     const conditions = [];
     const params = [];
 
-    // filtros opcionales
-    if (filters.estatus) {
+    // --- Filtros opcionales
+
+    // Validar estatus permitiendo el 0
+    if (filters.estatus !== undefined && filters.estatus !== null && filters.estatus !== '') {
       conditions.push('f.estatus = ?');
       params.push(filters.estatus);
     }
 
-    if (filters.id_ciudad) {
+    if (filters.id_ciudad !== undefined && filters.id_ciudad !== null && filters.id_ciudad !== '') {
       conditions.push('f.id_ciudad = ?');
       params.push(filters.id_ciudad);
     }
@@ -73,12 +86,12 @@ class Floreria {
 
     const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
 
-    // contar total
+    // --- Query de Conteo ---
     const countSql = `SELECT COUNT(*) as total FROM florerias f ${whereClause}`;
     const [countResult] = await query(countSql, params);
     const total = countResult.total;
 
-    // Obtener registros
+    // En lugar de usar 'LIMIT ? OFFSET ?', inyectar los números validados
     const sql = `
       SELECT 
         f.*,
@@ -89,11 +102,10 @@ class Floreria {
       INNER JOIN ciudades c ON f.id_ciudad = c.id
       INNER JOIN usuarios u ON f.id_usuario = u.id
       ${whereClause}
-      ORDER BY f.created_at DESC
-      LIMIT ? OFFSET ?
+      LIMIT ${limitNum} OFFSET ${offset}
     `;
 
-    const florerias = await query(sql, [...params, limit, offset]);
+    const florerias = await query(sql, params);
 
     return { florerias, total };
   }
@@ -120,14 +132,16 @@ class Floreria {
     const values = [];
 
     const allowedFields = [
-      'nombre', 'descripcion', 'logo', 'ubicacion', 
-      'telefono', 'email', 'horario', 'estatus', 'id_ciudad'
+      'nombre', 'descripcion', 'logo', 'direccion',
+      'telefono', 'correo_electronico', 'horarios', 'estatus', 'id_ciudad'
     ];
 
     allowedFields.forEach(field => {
-      if (floreriaData[field] !== undefined) {
+      const value = floreriaData[field];
+      // Ignorar valores undefined, vacios o la palabra string por defecto de swagger
+      if (value !== undefined && value !== '' && value !== 'string') {
         fields.push(`${field} = ?`);
-        values.push(floreriaData[field]);
+        values.push(value);
       }
     });
 
@@ -139,7 +153,7 @@ class Floreria {
 
     const sql = `UPDATE florerias SET ${fields.join(', ')} WHERE id = ?`;
     await query(sql, values);
-    
+
     return this.findById(id);
   }
 

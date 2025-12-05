@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 class User {
   // crear usuario
   static async create(userData) {
-    const { nombre, email, password, rol = 'user' } = userData;
+    const { name, email, password, rol = 'user' } = userData;
     
     // encriptar contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -15,7 +15,7 @@ class User {
       VALUES (?, ?, ?, ?)
     `;
     
-    const result = await query(sql, [nombre, email, hashedPassword, rol]);
+    const result = await query(sql, [name, email, hashedPassword, rol]);
     return result.insertId;
   }
 

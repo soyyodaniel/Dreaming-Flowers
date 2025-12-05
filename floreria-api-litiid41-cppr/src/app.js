@@ -48,12 +48,12 @@ app.get('/', (req, res) => {
     }
   });
 });
- 
+
 
 // rutas de la API
 app.use('/api/auth', authRoutes);
 app.use('/api/florerias', floreriaRoutes);
- 
+
 
 // middleware de errores - siembre va al final del códig
 app.use(errorHandler);
