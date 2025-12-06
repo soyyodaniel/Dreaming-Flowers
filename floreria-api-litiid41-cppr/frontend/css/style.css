@@ -8,18 +8,17 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Estilos de la tarjeta de login */
+/* Estilos de la tarjeta de login/registro */
 .login-card {
     width: 100%;
     max-width: 400px;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    /* Sombra suave */
     background-color: white;
 }
 
-/* Estilo del logo o título */
+/* Estilo del logo */
 .brand-logo {
     color: #d63384;
     /* Rosa estilo florería */
@@ -27,14 +26,27 @@ body {
     margin-bottom: 5px;
 }
 
-/* Botón personalizado */
 .btn-login {
-    background-color: #d63384;
-    border: none;
+    background-color: #d63384 !important;
+    /* Usamos !important para asegurar que gane */
+    border-color: #d63384 !important;
+    color: white !important;
     transition: background-color 0.3s;
 }
 
 .btn-login:hover {
-    background-color: #b02a6b;
+    background-color: #b02a6b !important;
     /* Un poco más oscuro al pasar el mouse */
+    border-color: #b02a6b !important;
+}
+
+/* Enlaces rosas */
+a {
+    text-decoration: none;
+    color: #d63384;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #a61e4d;
 }
