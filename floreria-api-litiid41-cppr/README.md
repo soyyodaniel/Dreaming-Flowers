@@ -15,8 +15,9 @@ Victor Manuel Canche Che
 Estructura del Proyecto
 
 Páginas Web (Frontend)
-frontend/index.html - Página principal (Catálogo público y Ruleta)
+frontend/index.html - Página principal (Catálogo público y florería aleatoria)
 frontend/login.html - Acceso de usuarios y administradores
+frontend/register.html - Registro de usuarios
 frontend/admin.html - Panel de control y gestión (Dashboard)
 
 Estilos CSS
@@ -28,6 +29,7 @@ Scripts JavaScript
 frontend/js/public.js - Lógica del catálogo, paginación y ruleta
 frontend/js/admin.js - Lógica del dashboard, estadísticas y CRUD
 frontend/js/login.js - Autenticación y manejo de tokens
+frontend/js/register.js - Creación de usuarios y administradores
 
 Backend (API REST)
 src/app.js - Configuración principal del servidor Express
@@ -36,7 +38,7 @@ src/models/ - Modelos de acceso a datos (MySQL Queries)
 src/routes/ - Definición de endpoints de la API
 
 Base de Datos
-database/schema.sql - Esquema de tablas
+database/schema.sql - Esquema de tablas y datos iniciales
 
 Configuración
 src/config/database.js - Conexión a MySQL
@@ -48,7 +50,7 @@ Objetivos del Sprint
 [x] Implementación de API REST con Node.js y Express
 [x] Base de Datos MySQL con relaciones
 [x] Autenticación segura con JWT (Login/Admin)
-[x] Frontend Público con módulo de "Ruleta Floral"
+[x] Frontend Público con módulo de "Florería aleatoria"
 [x] Panel Administrativo con CRUD y Estadísticas
 [x] Integración final y pruebas
 
